@@ -19,5 +19,5 @@ public interface EspetaculosRepository extends JpaRepository<Espetaculos, Long>
     Optional<Espetaculos> findById(int id);
 
     //boolean findById(Integer idEspetaculo);
-    boolean findByIdAndDatahoraGreaterThan(int idEspetaculo, String datahora);
+
 }

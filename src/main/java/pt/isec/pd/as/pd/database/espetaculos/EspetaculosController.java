@@ -1,6 +1,7 @@
 package pt.isec.pd.as.pd.database.espetaculos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +16,18 @@ public class EspetaculosController
 {
     @Autowired private EspetaculosService service;
 
+//    @GetMapping
+//    public String getAllEspetaculos(){
+//        List<Espetaculos> espetaculosList = service.listAllEspetaculos();
+//        return espetaculosList.toString();
+//    }
+
     @GetMapping
-    public String getAllEspetaculos(){
+    public ResponseEntity<List<Espetaculos>> getAllEspetaculos() {
         List<Espetaculos> espetaculosList = service.listAllEspetaculos();
-        return espetaculosList.toString();
+        return ResponseEntity.ok().body(espetaculosList);
     }
+
 
     @GetMapping("/")
     public List<Espetaculos> searchEspetaculos(@RequestParam(required = false) String pais,

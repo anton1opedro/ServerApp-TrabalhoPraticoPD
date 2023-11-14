@@ -47,7 +47,7 @@ public class EspetaculosService
     }
 
     public boolean checkEspetaculos(int idEspetaculo) {
-        if (connection.findByIdAndDatahoraGreaterThan(idEspetaculo, String.valueOf(LocalDateTime.now()))){
+        if (!(connection.findById(idEspetaculo)).isEmpty()){
             return true;
         } else {
             return false;
