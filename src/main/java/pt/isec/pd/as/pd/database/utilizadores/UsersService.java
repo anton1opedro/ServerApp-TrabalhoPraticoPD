@@ -1,13 +1,27 @@
 package pt.isec.pd.as.pd.database.utilizadores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
+import pt.isec.pd.as.pd.seguranca.Role;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import com.nimbusds.jose.jwk.JWK;
 
 @Service
-public class UsersService
+public class UsersService implements UserDetailsService
 {
     @Autowired
     private UsersRepository usersRepository;
@@ -18,6 +32,12 @@ public class UsersService
 
     public Users create(Users client) {
         return usersRepository.save(client);
+    }
+
+    // joana
+    public boolean findUser(String username, String password) {
+        Users user = usersRepository.findByUsername(username);
+        return user != null;
     }
 
     public String addUser(String nome, String username, String password) {
@@ -81,6 +101,31 @@ public class UsersService
         return "User updated successfully.";
     }
 
+    //@Autowired
+    //private PasswordEncoder encoder;
 
+    private JwtEncoder encoder;
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        /*Set<Role> roles = new HashSet<>();
+        roles.add(new Role(1L, "USER"));*/
+
+        JwtClaimsSet claims = JwtClaimsSet.builder()
+                .issuer("servidor")
+                .issuedAt(Instant.now())
+                .expiresAt(Instant.now().plus(1, ChronoUnit.HOURS))
+                .claim("username", username)
+                .build();
+
+
+        return new Users(1L, "Username", encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue(), "nome", 0);
+    }
+
+    public Users findUserByUsername(String username, String password) {
+        return usersRepository.findByUsername(username);
+    }
 }
 
