@@ -43,7 +43,16 @@ public class UsersController
 
     @PostMapping("/login")
     public String loginUser(@RequestBody Users.UserDTO userDTO, HttpServletResponse response) {
-        if (service.authenticateUser(userDTO.getUsername(), userDTO.getPassword())) {
+        try{
+            Authentication auth = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword())
+            );
+            String token = tokenService.generateToken(auth);
+            return token;
+        }catch(AuthenticationException e) {
+            throw new RuntimeException(e);
+        }
+        /*if (service.authenticateUser(userDTO.getUsername(), userDTO.getPassword())) {
             try{
                 Authentication auth = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword())
@@ -57,7 +66,7 @@ public class UsersController
             return "Login Successful";
         } else {
             return "Invalid username or password";
-        }
+        }*/
     }
 
     @PutMapping("/update")

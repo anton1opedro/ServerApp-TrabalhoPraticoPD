@@ -103,29 +103,42 @@ public class UsersService implements UserDetailsService
 
     //@Autowired
     //private PasswordEncoder encoder;
-
+/*
     private JwtEncoder encoder;
-
-
+*/
+/*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+*/
         /*Set<Role> roles = new HashSet<>();
         roles.add(new Role(1L, "USER"));*/
-
+/*
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("servidor")
                 .issuedAt(Instant.now())
                 .expiresAt(Instant.now().plus(1, ChronoUnit.HOURS))
                 .claim("username", username)
-                .build();
+                .build();*/
 
 
-        return new Users(1L, "Username", encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue(), "nome", 0);
-    }
+      //  return new Users(1L, "Username", encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue(), "nome", 0);
+    //}
 
     public Users findUserByUsername(String username, String password) {
         return usersRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+
+
+        if (usersRepository.findByUsername(username).getId() != null) {
+            return usersRepository.findByUsername(username);
+        }
+        System.out.println("User not found!");
+
+        return null;
     }
 }
 

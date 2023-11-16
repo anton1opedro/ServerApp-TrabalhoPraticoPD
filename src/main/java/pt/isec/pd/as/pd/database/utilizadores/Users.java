@@ -26,8 +26,8 @@ public class Users implements UserDetails
         this.administrador = administrador;
     }
 
-    @ManyToMany(fetch=FetchType.EAGER)
-    private Set<Role> authorities;
+    //@ManyToMany(fetch=FetchType.EAGER)
+    //private Set<Role> authorities;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
