@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pt.isec.pd.as.pd.NotificationServer;
+//import pt.isec.pd.as.pd.NotificationServer;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,7 +14,7 @@ import java.net.Socket;
 @RequestMapping("/notificacao")
 public class NotificationController
 {
-    private final NotificationServer notificationServer;
+   /* private final NotificationServer notificationServer;
 
     @Autowired
     public NotificationController(NotificationServer notificationServer) {
@@ -36,5 +36,5 @@ public class NotificationController
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }
