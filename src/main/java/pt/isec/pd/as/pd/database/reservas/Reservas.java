@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import pt.isec.pd.as.pd.database.espetaculos.Espetaculos;
 import pt.isec.pd.as.pd.database.lugares.Lugares;
 import pt.isec.pd.as.pd.database.utilizadores.Users;
+import pt.isec.pd.as.pd.database.utilizadores.UsersRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Reservas
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "id_utilizador", nullable = false)
@@ -60,15 +61,31 @@ public class Reservas
         this.data_hora = data_hora;
     }
 
-    public static class ReservaRequest {
-        private int idEstpetaculo;
-        private int idLugar;
-        private Double preco;
-        private String fila;
-        private String assento;
+    public int getPago() {
+        return pago;
+    }
 
-        public int getIdEstpetaculo() {
-            return idEstpetaculo;
+    public void setPago(int pago) {
+        this.pago = pago;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public static class ReservaRequest {
+        private int getIdEspetaculo;
+        private int idLugar;
+//        private Double preco;
+//        private String fila;
+//        private String assento;
+
+        public int getIdEspetaculo() {
+            return getIdEspetaculo;
         }
 
         public int getIdLugar() {
@@ -80,32 +97,33 @@ public class Reservas
         }
 
         public void setIdEstpetaculo(int idEstpetaculo) {
-            this.idEstpetaculo = idEstpetaculo;
+            this.getIdEspetaculo = idEstpetaculo;
         }
 
-        public Double getPreco() {
-            return preco;
-        }
+//        public Double getPreco() {
+//            return preco;
+//        }
+//
+//        public void setPreco(Double preco) {
+//            this.preco = preco;
+//        }
+//
+//        public String getFila() {
+//            return fila;
+//        }
+//
+//        public void setFila(String fila) {
+//            this.fila = fila;
+//        }
+//
+//        public String getAssento() {
+//            return assento;
+//        }
+//
+//        public void setAssento(String assento) {
+//            this.assento = assento;
+//        }
 
-        public void setPreco(Double preco) {
-            this.preco = preco;
-        }
-
-        public String getFila() {
-            return fila;
-        }
-
-        public void setFila(String fila) {
-            this.fila = fila;
-        }
-
-        public String getAssento() {
-            return assento;
-        }
-
-        public void setAssento(String assento) {
-            this.assento = assento;
-        }
     }
 }
 

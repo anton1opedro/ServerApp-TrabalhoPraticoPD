@@ -37,6 +37,10 @@ public class Lugares
         return espetaculo;
     }
 
+    public void setEspetaculo(Espetaculos espetaculo) {
+        this.espetaculo = espetaculo;
+    }
+
     public String getFila() {
         return fila;
     }

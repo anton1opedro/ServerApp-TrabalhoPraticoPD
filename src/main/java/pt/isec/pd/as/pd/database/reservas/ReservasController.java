@@ -32,56 +32,41 @@ public class ReservasController
     }
 
     @GetMapping("/nao-pagas")
-    public List<Reservas> getReservationsAwaitingPaymentConfitmation() {
-        return service.getReservationsAwaitingPaymentConfirmation();
+    public List<Reservas> getReservationsAwaitingPaymentConfitmation(@RequestParam int id_utilizador) {
+        return service.getReservationsAwaitingPaymentConfirmation(id_utilizador);
     }
 
     @GetMapping("/pagas")
-    public List<Reservas> getPaidReservations() {
-        return service.getPaidReservations();
+    public List<Reservas> getPaidReservations(@RequestParam int id_utilizador) {
+        return service.getPaidReservations(id_utilizador);
     }
 
-//    @DeleteMapping("/apaga-reserva/{id}")
-//    public ResponseEntity<String> deleteReservation(@PathVariable Long id) {
-//        if (service.deleteReservation(id)) {
-//            return ResponseEntity.ok("Reservation deleted successfully");
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @PutMapping("/{id}/pagamento")
+    public ResponseEntity<String> payReservation(@PathVariable int id) {
+        if (service.markReservationAsPaid(id)) {
+            return ResponseEntity.ok("Reservation marked as paid.");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Reservation could not be paid.");
+        }
+    }
+
+    @DeleteMapping("/apaga-reserva/{id}")
+    public ResponseEntity<String> deleteReservation(@PathVariable int id) {
+        if (service.deleteReservationIfNotPaid(id)) {
+            return ResponseEntity.ok("Reservation deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unable to delete the reservation.");
+        }
+    }
 
     @PostMapping("/criar-reserva")
-    public ResponseEntity<String> makeReservations(@RequestBody Reservas.ReservaRequest reservaRequest) {
+    public ResponseEntity<String> criarReserva(
+            @RequestBody Reservas.ReservaRequest reservaRequest,
+            @RequestParam int idUtilizador) {
+
         try {
-            Reservas reserva = new Reservas();
-            int idEspetaculo = reservaRequest.getIdEstpetaculo();
-            //Espetaculos espetaculos = EspetaculosRepository.findById(idEspetaculo).orElseThrow(() -> new IllegalArgumentException("Invalid espetaculo ID: " + idEspetaculo));
-            Optional<Espetaculos> espetaculosOptional = espetaculosService.findById(idEspetaculo);
-
-            if (!espetaculosOptional.isEmpty()) {
-                Espetaculos espetaculos = espetaculosOptional.get();
-
-                reserva.setEspetaculo(espetaculos);
-
-                Lugares lugar = new Lugares();
-                lugar.setAssento(reservaRequest.getAssento());
-                lugar.setFila(reservaRequest.getFila());
-
-                Double preco = lugar.getPreco();
-
-                reserva.addLugar(lugar);
-
-                lugar.setPreco(reservaRequest.getPreco());
-                LocalDateTime currentDateTime = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formattedDateTime = currentDateTime.format(formatter);
-                reserva.setData_hora(formattedDateTime);
-
-                Reservas createdReserva = service.create(reserva);
-                return ResponseEntity.ok("Reservation created successfully");
-            }
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Espetaculo não existe.");
+            Reservas createdReserva = service.makeReservation(reservaRequest, idUtilizador);
+            return ResponseEntity.ok("Reservation created successfully with ID: " + createdReserva.getUser().getId());
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

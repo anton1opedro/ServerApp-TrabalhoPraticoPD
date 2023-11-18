@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface LugaresRepository extends JpaRepository<Lugares, Long> {
-    Optional<Lugares> findById(Long id);
+    Optional<Lugares> findById(int id);
     List<Lugares> findByEspetaculoId(int idEspetaculo);
 }
