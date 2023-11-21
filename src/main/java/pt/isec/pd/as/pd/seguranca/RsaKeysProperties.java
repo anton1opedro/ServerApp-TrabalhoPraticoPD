@@ -9,9 +9,6 @@ import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-//@Configuration
-//@ConfigurationProperties(prefix = "rsa")
-//@ConstructorBinding
 @Component
 public class RsaKeysProperties {
     public RSAPublicKey publicKey;

@@ -45,13 +45,13 @@ public class UsersController
 
 
     @PostMapping("/login")
-/*    public ResponseEntity<String> loginUser(@RequestBody Users.UserDTO userDTO) {
+    public ResponseEntity<String> loginUser(@RequestBody Users.UserDTO userDTO) {
         if (service.authenticateUser(userDTO.getUsername(), userDTO.getPassword())) {
             return ResponseEntity.ok("Login Successful");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-        }*/
-    public String loginUser(@RequestBody Users.UserDTO userDTO, HttpServletResponse response) {
+        }
+    /*public String loginUser(@RequestBody Users.UserDTO userDTO, HttpServletResponse response) {
         try{
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword())
@@ -60,21 +60,6 @@ public class UsersController
             return token;
         }catch(AuthenticationException e) {
             throw new RuntimeException(e);
-        }
-        /*if (service.authenticateUser(userDTO.getUsername(), userDTO.getPassword())) {
-            try{
-                Authentication auth = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword())
-                );
-                String token = tokenService.generateToken(auth);
-                return token;
-            }catch(AuthenticationException e)
-            {
-                System.out.println("Error loging in");
-            }
-            return "Login Successful";
-        } else {
-            return "Invalid username or password";
         }*/
     }
 

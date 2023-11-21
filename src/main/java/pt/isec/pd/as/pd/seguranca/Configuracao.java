@@ -69,17 +69,17 @@ public class Configuracao {
                 .build();
     }*/
 
-    /*@Bean
-    public SecurityFilterChain loginFilterChain(HttpSecurity http) throws Exception
-    {
-        return http
-                .csrf(csrf -> csrf.disable())
-                .securityMatcher("/login")
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
-    }*/
+//    @Bean
+//    public SecurityFilterChain loginFilterChain(HttpSecurity http) throws Exception
+//    {
+//        return http
+//                .csrf(csrf -> csrf.disable())
+//                .securityMatcher("/login")
+//                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+//                .httpBasic(Customizer.withDefaults())
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .build();
+//    }
 
     @Bean
     public SecurityFilterChain unauthenticatedFilterChain(HttpSecurity http) throws Exception
