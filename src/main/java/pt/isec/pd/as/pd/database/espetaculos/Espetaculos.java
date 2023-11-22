@@ -3,7 +3,6 @@ package pt.isec.pd.as.pd.database.espetaculos;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.util.Set;
 
 @Entity
 @Table(name = "espetaculo")

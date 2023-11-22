@@ -16,12 +16,6 @@ public class EspetaculosController
 {
     @Autowired private EspetaculosService service;
 
-//    @GetMapping
-//    public String getAllEspetaculos(){
-//        List<Espetaculos> espetaculosList = service.listAllEspetaculos();
-//        return espetaculosList.toString();
-//    }
-
     @GetMapping
     public ResponseEntity<List<Espetaculos>> getAllEspetaculos() {
         List<Espetaculos> espetaculosList = service.listAllEspetaculos();

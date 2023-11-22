@@ -17,9 +17,6 @@ public class Lugares
     @JoinColumn(name = "espetaculo_id", nullable = false)
     private Espetaculos espetaculo;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Reservas reserva;
-
     @Column(nullable = false)
     private String fila;
 

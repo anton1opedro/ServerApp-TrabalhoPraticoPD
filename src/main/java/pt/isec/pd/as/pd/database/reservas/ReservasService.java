@@ -102,11 +102,8 @@ public class ReservasService
                 Optional<Users> userOptional = usersConnection.findById(idUtilizador);
                 userOptional.ifPresent(reserva::setUser);
 
-//                Double preco = lugar.getPreco();
-
                 reserva.addLugar(lugar);
 
-//                lugar.setPreco(reservaRequest.getPreco());
                 LocalDateTime currentDateTime = LocalDateTime.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = currentDateTime.format(formatter);

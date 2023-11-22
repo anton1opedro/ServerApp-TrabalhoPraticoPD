@@ -17,12 +17,6 @@ public class LugaresController
     @Autowired
     LugaresService service;
 
-//    @GetMapping
-//    public String getLugares() {
-//        List<Lugares> lugaresList = service.listAllLugares();
-//        return lugaresList.toString();
-//    }
-
     @GetMapping
     public ResponseEntity<List<Lugares>> getLugaresByEspetaculoId(@RequestParam int idEspetaculo) {
         List<Lugares> lugaresList = service.getLugaresByEspetaculoId(idEspetaculo);

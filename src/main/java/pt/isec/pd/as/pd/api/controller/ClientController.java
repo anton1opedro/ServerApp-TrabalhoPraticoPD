@@ -11,17 +11,9 @@ import pt.isec.pd.as.pd.database.utilizadores.UsersService;
 @RestController
 public class ClientController {
 
-    /*@Autowired
-    UsersService usersService;*/
-
     @GetMapping
     public String getClient(String username){
         return "Hello World!";
     }
-
-    /*@PostMapping("/newClient")
-    public Users newClient(@RequestBody Users client){
-        return usersService.create(client);
-    }*/
 
 }

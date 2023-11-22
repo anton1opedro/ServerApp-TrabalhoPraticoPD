@@ -39,7 +39,6 @@ import java.util.Collections;
 public class PdTpApplication {
 
     //@Bean(initMethod = "startServer", destroyMethod = "closeServerSocket")
-    //@Bean
 //    public void notificationServer() {
 //        ServerSocket serverSocket = null;
 //        try {
@@ -51,18 +50,6 @@ public class PdTpApplication {
 //        System.out.println("AQUI NOTIFICATION SERVER");
 //        notificationServer.run();
 //    }
-
-//    public void NotificationServer notificationServer() {
-//        ServerSocket serverSocket = null;
-//        try {
-//            serverSocket = new ServerSocket(8000);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        NotificationServer notificationServer = new NotificationServer(serverSocket);
-//        notificationServer.startServer();
-//    }
-
 
     @Autowired
     private DataSourceProperties dataSourceProperties;
@@ -90,22 +77,8 @@ public class PdTpApplication {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        NotificationServer notificationServer = new NotificationServer(serverSocket);
-//        notificationServer.startServer();
         new Thread(new NotificationServer(serverSocket)).start();
-        System.out.println("AQUI NA MAIN");
         app.run(args);
-
-//        ServerSocket serverSocket = null;
-//
-//        try {
-//            serverSocket = new ServerSocket(8000);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        NotificationServer notificationServer = new NotificationServer(serverSocket);
-//        notificationServer.startServer();
     }
 
 }

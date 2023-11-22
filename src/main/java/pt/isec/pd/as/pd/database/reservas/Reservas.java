@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import pt.isec.pd.as.pd.database.espetaculos.Espetaculos;
 import pt.isec.pd.as.pd.database.lugares.Lugares;
 import pt.isec.pd.as.pd.database.utilizadores.Users;
-import pt.isec.pd.as.pd.database.utilizadores.UsersRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +79,6 @@ public class Reservas
     public static class ReservaRequest {
         private int getIdEspetaculo;
         private int idLugar;
-//        private Double preco;
-//        private String fila;
-//        private String assento;
 
         public int getIdEspetaculo() {
             return getIdEspetaculo;
@@ -99,30 +95,6 @@ public class Reservas
         public void setIdEstpetaculo(int idEstpetaculo) {
             this.getIdEspetaculo = idEstpetaculo;
         }
-
-//        public Double getPreco() {
-//            return preco;
-//        }
-//
-//        public void setPreco(Double preco) {
-//            this.preco = preco;
-//        }
-//
-//        public String getFila() {
-//            return fila;
-//        }
-//
-//        public void setFila(String fila) {
-//            this.fila = fila;
-//        }
-//
-//        public String getAssento() {
-//            return assento;
-//        }
-//
-//        public void setAssento(String assento) {
-//            this.assento = assento;
-//        }
 
     }
 }
